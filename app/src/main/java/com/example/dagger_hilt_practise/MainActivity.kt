@@ -14,9 +14,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.dagger_hilt_practise.ui.theme.DaggerhiltpractiseTheme
 
 class MainActivity : ComponentActivity() {
+    private lateinit var wiFiManager: WiFiManager
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
+
+        val wiFiSettings = WiFiSettings()
+        wiFiManager = WiFiManager(wiFiSettings)
+        wiFiManager.connect()
+        wiFiManager.sendMessage()
         setContent {
             DaggerhiltpractiseTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
