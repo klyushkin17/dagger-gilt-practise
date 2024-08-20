@@ -12,16 +12,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.example.dagger_hilt_practise.ui.theme.DaggerhiltpractiseTheme
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    private lateinit var wiFiManager: WiFiManager
+    //По умолчанию создается новый экземпляр класса
+    @Inject
+    lateinit var wiFiManager: WiFiManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        val wiFiSettings = WiFiSettings()
-        wiFiManager = WiFiManager(wiFiSettings)
         wiFiManager.connect()
         wiFiManager.sendMessage()
         setContent {
